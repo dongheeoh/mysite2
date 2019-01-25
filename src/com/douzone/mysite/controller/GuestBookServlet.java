@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.douzone.mvc.action.AbstractActionFactory;
 import com.douzone.mvc.action.Action;
 import com.douzone.mysite.action.guestbook.GuestbookActionFactory;
-import com.douzone.mysite.action.user.UserActionFactory;
 
 
 @WebServlet("/guest")

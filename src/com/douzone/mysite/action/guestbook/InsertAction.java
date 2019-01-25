@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.douzone.mvc.action.Action;
 import com.douzone.mvc.util.WebUtils;
 import com.douzone.mysite.repository.GuestBookDao;
-import com.douzone.mysite.repository.UserDao;
 import com.douzone.mysite.vo.GuestBookVo;
-import com.douzone.mysite.vo.UserVo;
 
 public class InsertAction implements Action {
 

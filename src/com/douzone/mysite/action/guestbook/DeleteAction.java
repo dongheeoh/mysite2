@@ -9,7 +9,6 @@ import com.douzone.mvc.action.Action;
 import com.douzone.mvc.util.WebUtils;
 import com.douzone.mysite.repository.GuestBookDao;
 import com.douzone.mysite.vo.GuestBookVo;
-import com.mysql.fabric.Response;
 
 
 public class DeleteAction implements Action {

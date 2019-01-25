@@ -10,9 +10,6 @@ import java.util.List;
 import com.douzone.mysite.vo.GuestBookVo;
 
 
-
-
-
 public class GuestBookDao {
 	public boolean insert(GuestBookVo vo) {
 		boolean result=false;
