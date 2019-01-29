@@ -42,7 +42,9 @@
 								<td><a href="${pageContext.servletContext.contextPath }/guest?a=deleteform&no=${vo.no }">삭제</a></td>
 							</tr>
 							<tr>
-								<td></td>
+								<td colspan=4>
+										${fn:replace(vo.text, newline, "<br>")}
+									</td>
 							</tr>
 						</table>
 						<br>

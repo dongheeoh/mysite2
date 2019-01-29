@@ -30,6 +30,7 @@ public class UserDao {
 			
 			
 			int count=pstmt.executeUpdate();
+			 
 			
 		} catch (SQLException e) {
 			System.out.println("error:"+e);
