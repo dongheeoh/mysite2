@@ -14,7 +14,7 @@ public class BoardFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse respnonse)
 			throws IOException, ServletException {
-		WebUtils.redirect(request, respnonse, request.getContextPath()+"/board?a=boardselect");
+		WebUtils.forward(request, respnonse, request.getContextPath()+"/board?a=boardselect");
 	}
 
 }

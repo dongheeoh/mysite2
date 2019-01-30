@@ -12,6 +12,8 @@ import com.douzone.mysite.vo.BoardVo;
 
 public class BoardDao {
 	
+
+	
 	public List<BoardVo> getList(long no)
 	{
 		BoardVo result = null;
@@ -373,65 +375,137 @@ public class BoardDao {
 		return result;
 	}
 
-	public List<BoardVo> getList() {
+	
+	public List<BoardVo> getList(String kwd, int startPage, int listCount)
+	{
 		BoardVo result = null;
-
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		List<BoardVo> list = new ArrayList<>();
-
-		try {
-			conn = getConnection();
-
-			String sql = "select a.title, b.name, a.hit, a.write_date, a.depth, a.contents, a.no, a.user_no, a.o_no"
-					+ "	from bord a, user b" + "		where a.user_no = b.no"
-					+ "			order by a.g_no desc, a.o_no asc";
-
-			pstmt = conn.prepareCall(sql);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				String title = rs.getString(1);
-				String name = rs.getString(2);
-				long hit = rs.getLong(3);
-				String write_Date = rs.getString(4);
-				long depth = rs.getLong(5);
-				String contents = rs.getString(6);
-				long no = rs.getLong(7);
-				long userNo = rs.getLong(8);
-				long oNo = rs.getLong(9);
-
-				result = new BoardVo();
-				result.setTitle(title);
-				result.setName(name);
-				result.setHit(hit);
-				result.setWriteDate(write_Date);
-				result.setDepth(depth);
-				result.setText(contents);;
-				result.setNo(no);
-				result.setUserNo(userNo);
-				result.setoNo(oNo);
-
-				list.add(result);
-			}
-		} catch (SQLException e) {
+		
+		try 
+		{
+			 conn = getConnection();
+			 System.out.println(kwd);
+			 String sql = "select a.title, b.name, a.hit, a.write_date, a.depth, a.contents, a.no, a.user_no, a.o_no" + 
+					 	  "	from bord a, user b" + 
+					 	  "		where a.user_no = b.no and (a.title like '%" + kwd + "%' or a.contents like '%" + 
+					 	  kwd + "%' or b.name like '%" + kwd + "%')" + 
+					 	  "			group by a.no" + 
+					 	  "			order by a.g_no desc, a.o_no asc" +
+					 	  "				limit ?, ?";
+			 
+			 pstmt = conn.prepareCall(sql);
+			 pstmt.setInt(1, startPage-1);
+			 pstmt.setInt(2, listCount);
+			 
+			 rs = pstmt.executeQuery();
+			 
+			 while (rs.next())
+			 {
+				 String title = rs.getString(1);
+				 String name = rs.getString(2);
+				 long hit = rs.getLong(3);
+				 String write_Date = rs.getString(4);
+				 long depth = rs.getLong(5);
+				 String contents = rs.getString(6);
+				 long no = rs.getLong(7);
+				 long userNo = rs.getLong(8);
+				 long oNo = rs.getLong(9);
+				 
+				 result = new BoardVo();
+				 result.setTitle(title);
+				 result.setName(name);
+				 result.setHit(hit);
+				 result.setWriteDate(write_Date);
+				 result.setDepth(depth);
+				 result.setText(contents);
+				 result.setNo(no);
+				 result.setUserNo(userNo);
+				 result.setoNo(oNo);
+				 
+				 list.add(result);
+			 }
+		} 
+		catch (SQLException e) 
+		{
 			System.out.println("error : " + e);
-		} finally {
-			try {
+		}
+		finally 
+		{
+			try 
+			{
 				if (rs != null)
 					rs.close();
 				if (pstmt != null)
 					pstmt.close();
 				if (conn != null)
 					conn.close();
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) 
+			{
 				e.printStackTrace();
 			}
 		}
+		
+		return list;
+	}
+	
+	
+	public List<BoardVo> getList()
+	{
+		BoardVo result = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<BoardVo> list = new ArrayList<>();
+		
+		try 
+		{
+			 conn = getConnection();
+			 String sql = "select count(*) from bord";
+			 
+			 pstmt = conn.prepareCall(sql);
 
+			 rs = pstmt.executeQuery();
+			 
+			 while (rs.next())
+			 {
+				 long totalCount = rs.getLong(1);
+				 
+				 
+				 result = new BoardVo();
+				 result.setTotalCount(totalCount);
+				 
+				 list.add(result);
+			 }
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("error : " + e);
+		}
+		finally 
+		{
+			try 
+			{
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
 		return list;
 	}
 

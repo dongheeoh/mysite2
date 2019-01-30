@@ -11,6 +11,14 @@ public class BoardVo {
 	private long oNo;
 	private long depth;
 	private long userNo;
+	private long totalCount;
+	
+	public long getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(long totalCount) {
+		this.totalCount = totalCount;
+	}
 	public long getNo() {
 		return no;
 	}
@@ -75,10 +83,8 @@ public class BoardVo {
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", name=" + name + ", text=" + text + ", writeDate="
 				+ writeDate + ", hit=" + hit + ", gNo=" + gNo + ", oNo=" + oNo + ", depth=" + depth + ", userNo="
-				+ userNo + "]";
+				+ userNo + ", totalCount=" + totalCount + "]";
 	}
-	
-
 	
 	
 }
