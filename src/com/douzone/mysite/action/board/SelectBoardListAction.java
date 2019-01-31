@@ -19,37 +19,33 @@ public class SelectBoardListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse respnonse)
 			throws IOException, ServletException {
 		
-		// 총 게시물수 DB에서 받아옴
+		
 				List<BoardVo> totalCountList = new BoardDao().getList();
 				
-				// 총 게시물 수
+			
 				long totalCount = totalCountList.get(0).getTotalCount();
 				
 				
-				// 화면에 보여줄 게시물수
+			
 				int listCount = 5;
 				
-				// 필요한 총 페이지수
-				long totalPage = (totalCount % listCount > 0) ?   
-									(totalCount / listCount) + 1 : 
-										totalCount / listCount;
-				// 화면에 보여줄 페이지수
-				int pageCount = 5; 
 				
-				// 현재 페이지
+				long totalPage = (totalCount % listCount > 0) ?(totalCount / listCount) + 1 :totalCount / listCount;
+
+				int pageCount = 5; //size
+				
+			
 				int getPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
 				int page = (int) ((getPage > totalPage) ? totalPage : getPage);
 				
-				// 시작 페이지
+
 				int startPage = (( (page-1) / pageCount) * pageCount) + 1;
-				System.out.println("startPage="+startPage);
 				
-				// 마지막 페이지
+
 				int endPage = startPage + pageCount - 1;
-				System.out.println("page="+endPage);
 				
 				List<BoardVo> list = null;
-				
+				//찾기
 				if (request.getParameter("kwd") == null)
 					list = new BoardDao().getList("", ((page-1) * listCount) + 1, listCount);
 				
@@ -64,6 +60,7 @@ public class SelectBoardListAction implements Action {
 				request.setAttribute("totalPage", totalPage);
 				request.setAttribute("listCount", listCount);
 				request.setAttribute("page", page);
+				
 				WebUtils.forward(request, respnonse, "/WEB-INF/views/board/list.jsp");
 
 	}
