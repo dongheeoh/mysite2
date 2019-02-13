@@ -1,4 +1,4 @@
-package com.douzone.mysite.controller;
+package com.douzone.mysite.controller.api;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,13 +12,12 @@ import com.douzone.mvc.action.Action;
 import com.douzone.mysite.action.user.UserActionFactory;
 
 
-@WebServlet("/user")
+@WebServlet(name = "APIUserServlet", urlPatterns = { "/api/user" })
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		AbstractActionFactory af=new UserActionFactory();
 		
 		String actionName=request.getParameter("a");

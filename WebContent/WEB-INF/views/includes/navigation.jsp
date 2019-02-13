@@ -9,26 +9,32 @@
 			<c:when test='${param.menu == "main" }'>
 				<li class="selected"><a
 					href="${pageContext.servletContext.contextPath }">오동희</a></li>
-				<li><a
-					href="${pageContext.servletContext.contextPath }/guest?a=list">방명록</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/guest?a=list">방명록</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/guest?a=ajax">방명록(Ajax)</a></li>	
 				<li><a href="${pageContext.servletContext.contextPath }/board?a=list">게시판</a></li>
 			</c:when>
 			<c:when test='${param.menu == "guestbook" }'>
 				<li><a href="${pageContext.servletContext.contextPath }">오동희</a></li>
-				<li class="selected"><a
-					href="${pageContext.servletContext.contextPath }/guest?a=list">방명록</a></li>
+				<li class="selected"><a href="${pageContext.servletContext.contextPath }/guest?a=list">방명록</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/guest?a=ajax">방명록(Ajax)</a></li>
 				<li><a href="${pageContext.servletContext.contextPath }/board?a=list">게시판</a></li>
 			</c:when>
 			<c:when test='${param.menu == "board" }'>
 				<li><a href="${pageContext.servletContext.contextPath }">오동희</a></li>
-				<li><a
-					href="${pageContext.servletContext.contextPath }/guest?a=list">방명록</a></li>
-				<li class="selected"><a
-					href="${pageContext.servletContext.contextPath }/board?a=list">게시판</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/guest?a=list">방명록</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/guest?a=ajax">방명록(Ajax)</a></li>
+				<li class="selected"><a href="${pageContext.servletContext.contextPath }/board?a=list">게시판</a></li>
+			</c:when>
+			<c:when test='${param.menu == "guestbook-ajax" }'>
+				<li><a href="${pageContext.servletContext.contextPath }">오동희</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/guest?a=list">방명록</a></li>
+				<li class="selected"><a href="${pageContext.servletContext.contextPath }/guest?a=ajax">방명록(Ajax)</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/board?a=list">게시판</a></li>
 			</c:when>
 			<c:otherwise>
 			<li><a href="${pageContext.servletContext.contextPath }">오동희</a></li>
 			<li><a href="${pageContext.servletContext.contextPath }/guest?a=list">방명록</a></li>
+			<li><a href="${pageContext.servletContext.contextPath }/guest?a=ajax">방명록(Ajax)</a></li>
 			<li><a href="${pageContext.servletContext.contextPath }/board?a=list">게시판</a></li>
 			
 			</c:otherwise>
